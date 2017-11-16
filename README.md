@@ -33,19 +33,18 @@ Classification models, while eliminating this problem by predicting a more granu
 Regression model: Errors assumed to be normally distributed. 
 ![aaaa](https://lh3.googleusercontent.com/lSb5rz3q7H1DfIBcky1AQSec-ff3FWu8343clx0_zTOoMeJB1gbqRMUZnNTbMoIEA0d4UJzLYqD2YCD2IygtuIA6yQEKPNSUR1wcYjKi3PGQAB2E1dSZwIJnANVIFg2Lw0FsQeyJvf0)KD-Tree model: Very coarse result. 
 
-![](./img/kdtree.png =510x)
+![](./img/kdtree.png)
 
 
 Model & Novelty
 ------------------
 A bivariate Gaussian distribution is a probability distribution over 2d space. It is used to generate the location coordinate pair.Then they leverage Mixture Density Network (MDN), which is a latent variable model where the conditional probability of p(y|x) is modelled as a mixture of K Gaussians where the mixing coefficients π and the parameters of Gaussian distributions μ and Σ are computed as a function of input using a neural network. 
-![](./img/f1.png =200x)
-However, in the case of geolocation or lexical dialectology, the relationship between inputs and outputs is not so obvious. Instead of using learn all the parameters, they proposed Mixture Density Network with Shared Parameters (MDN-SHARED) to find the latent relationship between geo-location and lexical dialectology within each sample.Finally, they extend the Gaussian mixtures in neural networks (as in MDN) for inverse regression problems by using them as an input representation when the input is a multidimensional continuous variable. Below are the neural networks they use for the MDN of two different tasks respectively.
-[](./img/NN.png?raw=true =500x)
+![](./img/f1.png)However, in the case of geolocation or lexical dialectology, the relationship between inputs and outputs is not so obvious. Instead of using learn all the parameters, they proposed Mixture Density Network with Shared Parameters (MDN-SHARED) to find the latent relationship between geo-location and lexical dialectology within each sample.Finally, they extend the Gaussian mixtures in neural networks (as in MDN) for inverse regression problems by using them as an input representation when the input is a multidimensional continuous variable. Below are the neural networks they use for the MDN of two different tasks respectively.
+![](./img/NN.png?raw=true)
 Evaluation of their approaches
 ------------------They apply the two described MDN models on two geotagged Twitter datasets for geolocation, and compare the results with state-of-the-art classification and regression baselines. In addition, they use the mixture of Gaussian representation of location to predict dialect terms from coordinates.Thus, their code contains 3 main modules, where the first two are used to predict location from text and the last one is to predict language from location:1) lang2loc.py implements mixture density networks to predict location from text input.2) lang2loc_mdnshared.py implements shared mixture density networks to predict location from text input. This improved the model as the global mixture of Gaussian structure exists and can be learned from all the samples rather than predicted for each individual sample.3) loc2lang.py implements a lexical dialectology model where given 2d coordinate inputs predicts a unigram probability distribution over vocabulary.The evaluation of the predictions of the geolocation models is based on three measures: Acc@161, Mean, and Median. And the evaluation of the lexical dialectology model is by using perplexity of the predicted unigram distribution to compare with a baseline where the Gaussian mixture layer is replaced with a tanh hidden layer.Below is a heat map of log probabilities of the term: “hella”, which is used mostly in north CA. They generate such [maps](https://drive.google.com/open?id=0B9ZfPKPvp-JiWlhoZ01HMk9GY3c) for a list of [local dialect words](https://drive.google.com/open?id=0B9ZfPKPvp-JiTW1yWlF2ZG56SUE) . 
 
-[](https://github.com/zgy921028/CS269NLP/blob/master/img/heatmap.png =600x)
+![](https://github.com/zgy921028/CS269NLP/blob/master/img/heatmap.png)
 
 
 
