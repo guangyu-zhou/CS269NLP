@@ -44,11 +44,6 @@ A bivariate Gaussian distribution is a probability distribution over 2d space. I
 
 However, in the case of geolocation or lexical dialectology, the relationship between inputs and outputs is not so obvious. Instead of using learn all the parameters, they proposed Mixture Density Network with Shared Parameters (MDN-SHARED) to find the latent relationship between geo-location and lexical dialectology within each sample.Finally, they extend the Gaussian mixtures in neural networks (as in MDN) for inverse regression problems by using them as an input representation when the input is a multidimensional continuous variable. Below are the neural networks they use for the MDN of two different tasks respectively.
 ![](./img/NN.png?raw=true)
-Evaluation of their approaches
-------------------They apply the two described MDN models on two geotagged Twitter datasets for geolocation, and compare the results with state-of-the-art classification and regression baselines. In addition, they use the mixture of Gaussian representation of location to predict dialect terms from coordinates.Thus, their code contains 3 main modules, where the first two are used to predict location from text and the last one is to predict language from location:1) lang2loc.py implements mixture density networks to predict location from text input.2) lang2loc_mdnshared.py implements shared mixture density networks to predict location from text input. This improved the model as the global mixture of Gaussian structure exists and can be learned from all the samples rather than predicted for each individual sample.3) loc2lang.py implements a lexical dialectology model where given 2d coordinate inputs predicts a unigram probability distribution over vocabulary.The evaluation of the predictions of the geolocation models is based on three measures: Acc@161, Mean, and Median. And the evaluation of the lexical dialectology model is by using perplexity of the predicted unigram distribution to compare with a baseline where the Gaussian mixture layer is replaced with a tanh hidden layer.Below is a heat map of log probabilities of the term: “hella”, which is used mostly in north CA. They generate such [maps](https://drive.google.com/open?id=0B9ZfPKPvp-JiWlhoZ01HMk9GY3c) for a list of [local dialect words](https://drive.google.com/open?id=0B9ZfPKPvp-JiTW1yWlF2ZG56SUE) . 
-
-![](https://github.com/zgy921028/CS269NLP/blob/master/img/heatmap.png)
-
 
 
 Here is the key function of their MDN-SHARED. 
@@ -83,8 +78,10 @@ Here is the key function of their MDN-SHARED.
         return loss
 
 ```
+Evaluation of their approaches
+------------------They apply the two described MDN models on two geotagged Twitter datasets for geolocation, and compare the results with state-of-the-art classification and regression baselines. In addition, they use the mixture of Gaussian representation of location to predict dialect terms from coordinates.Thus, their code contains 3 main modules, where the first two are used to predict location from text and the last one is to predict language from location:1) lang2loc.py implements mixture density networks to predict location from text input.2) lang2loc_mdnshared.py implements shared mixture density networks to predict location from text input. This improved the model as the global mixture of Gaussian structure exists and can be learned from all the samples rather than predicted for each individual sample.3) loc2lang.py implements a lexical dialectology model where given 2d coordinate inputs predicts a unigram probability distribution over vocabulary.The evaluation of the predictions of the geolocation models is based on three measures: Acc@161, Mean, and Median. And the evaluation of the lexical dialectology model is by using perplexity of the predicted unigram distribution to compare with a baseline where the Gaussian mixture layer is replaced with a tanh hidden layer.Below is a heat map of log probabilities of the term: “hella”, which is used mostly in north CA. They generate such [maps](https://drive.google.com/open?id=0B9ZfPKPvp-JiWlhoZ01HMk9GY3c) for a list of [local dialect words](https://drive.google.com/open?id=0B9ZfPKPvp-JiTW1yWlF2ZG56SUE) . 
 
-
+![](img/heatmap.png)
 
 
 
@@ -95,6 +92,35 @@ and TwitterUS a.k.a NA (a bigger Twitter geolocation dataset) both
 covering continental U.S. which can be downloaded from [here](https://www.amazon.com/clouddrive/share/kfl0TTPDkXuFqTZ17WJSnhXT0q6fGkTlOTOLZ9VVPNu)
 
 
+References
+----------
+
+Christopher Bishop. 1994. Mixture density networks. Technical report, Aston University. 
+
+Zsolt Bitvai and Trevor Cohn. 2015. Predicting peer- to-peer loan rates using bayesian non-linear regression. In Proceedings of the Twenty-Ninth AAAI Conference on Artificial Intelligence (AAAI-15), pages 2203–2209, Austin, USA. 
+
+Zhiyuan Cheng, James Caverlee, and Kyumin Lee. 2010. You are where you tweet: a content-based approach to geo-locating Twitter users. In Proceedings of the 19th ACM International Conference Information and Knowledge Management (CIKM 2010), pages 759–768, Toronto, Canada. 
+
+Paul Cook, Bo Han, and Timothy Baldwin. 2014. Statistical methods for identifying local dialectal terms from gps-tagged documents. Dictionaries: Journal of the Dictionary Society of North America, 35(35):248–271. 
+
+Gabriel Doyle. 2014. Mapping dialectal variation by querying social media. In Proceedings of the 14th Conference of the EACL (EACL 2014), pages 98– 106, Gothenburg, Sweden. 
+
+Jacob Eisenstein, Brendan O’Connor, Noah A Smith, and Eric P Xing. 2010. A latent variable model for geographic lexical variation. In Proceedings of the 2010 Conference on Empirical Methods in Natural Language Processing (EMNLP 2010), pages 1277– 1287, Boston, USA. 
+
+Noora Al Emadi, Sofiane Abbar, Javier Borge-Holthoefer, Francisco Guzman, and Fabrizio Sebastiani. 2017. QT2S: A system for monitoring road traffic via fine grounding of tweets. In Proceedings of the 11th International Conference on Weblogs and Social Media (ICWSM 2017), pages 456–459, Montreal, Canada. 
+
+Bruno Gonc ̧alves and David Sa ́nchez. 2014. Crowd- sourcing dialect characterization through Twitter. PloS One, 9(11). 
+
+Bo Han, Paul Cook, and Timothy Baldwin. 2012. Geolocation prediction in social media data by finding location indicative words. In Proceedings of the 24th International Conference on Computational Linguistics (COLING 2012), pages 1045– 1062, Mumbai, India. 
+
+Bo Han, Paul Cook, and Timothy Baldwin. 2014. Text- based Twitter user geolocation prediction. Journal of Artificial Intelligence Research, 49:451–500. 
+
+Shen-Shyang Ho, Mike Lieberman, Pu Wang, and Hanan Samet. 2012. Mining future spatiotemporal events and their sentiment from online news articles for location-aware recommendation system. In Proceedings of the First ACM SIGSPATIAL Interna- tional Workshop on Mobile Geographic Information Systems, pages 25–32, Redondo Beach, USA. 
+
+Yuan Huang, Diansheng Guo, Alice Kasakoff, and Jack Grieve. 2015. Understanding US regional linguistic variation with Twitter data analysis. Computers, En- vironment and Urban Systems, 59:244–255. 
+
+Hayate Iso, Shoko Wakamiya, and Eiji Aramaki. 2017. Density estimation for geolocation via convolutional mixture density network. arXiv preprint arXiv:1705.02750. 
+Sheila Kinsella, Vanessa Murdock, and Neil O’Hare. 2011. “I’m eating a sandwich in Glasgow”: Modeling locations with tweets. In Proceedings of the 3rd International Workshop on Search and Mining User- generated Contents, pages 61–68, Glasgow, UK.
 
 
 Contact
