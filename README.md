@@ -7,6 +7,7 @@ by Guangyu Zhou
 Reference Paper: [EMNLP2017 Paper](https://drive.google.com/open?id=0B9ZfPKPvp-JickpYa0drZWQxcHc)
 
 Code: [``GEOMDN``](https://github.com/afshinrahimi/geomdn)
+
 Background
 ------------
 
