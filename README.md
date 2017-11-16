@@ -31,7 +31,7 @@ Regression models, as a consequence of minimising squared loss for a unimodal di
 
 Classification models, while eliminating this problem by predicting a more granular target, don’t provide fine-grained predictions and also require heuristic discretisation of locations into regions (e.g. using clustering).
 Regression model: Errors assumed to be normally distributed. 
-![](https://lh3.googleusercontent.com/lSb5rz3q7H1DfIBcky1AQSec-ff3FWu8343clx0_zTOoMeJB1gbqRMUZnNTbMoIEA0d4UJzLYqD2YCD2IygtuIA6yQEKPNSUR1wcYjKi3PGQAB2E1dSZwIJnANVIFg2Lw0FsQeyJvf0 =500x)KD-Tree model: Very coarse result. 
+![aaaa](https://lh3.googleusercontent.com/lSb5rz3q7H1DfIBcky1AQSec-ff3FWu8343clx0_zTOoMeJB1gbqRMUZnNTbMoIEA0d4UJzLYqD2YCD2IygtuIA6yQEKPNSUR1wcYjKi3PGQAB2E1dSZwIJnANVIFg2Lw0FsQeyJvf0)KD-Tree model: Very coarse result. 
 
 ![](./img/kdtree.png =510x)
 
